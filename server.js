@@ -51,6 +51,8 @@ function scrapeData() {
                 if (team2ImageUrl) {
                     match.team2ImageUrl = downloadImage(team2ImageUrl);
                 }
+                match.team1result = $(elem).find('.brkts-popup-header-dev .brkts-popup-spaced .brkts-popup-spaced div:first-child').text();
+                match.team2result = $(elem).find('.brkts-popup-header-dev .brkts-popup-spaced .brkts-popup-spaced div:nth-child(2)').text();
 
                 matches.push(match);
             });

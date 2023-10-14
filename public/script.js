@@ -16,13 +16,13 @@ function loadData() {
             
             let tbody = document.getElementById('matches');
             tbody.innerHTML = "";
-            fillTable(matchesWithinOneHour, 'matches');
-            fillTable(matchesMoreThanOneHourAgo, 'past_matches');
+            fillUpcomingTable(matchesWithinOneHour, 'matches');
+            fillPastTable(matchesMoreThanOneHourAgo, 'past_matches');
         })
         .catch(error => console.error(error));
 }
 
-function fillTable(matches, tableId) {
+function fillUpcomingTable(matches, tableId) {
     let tbody = document.getElementById(tableId);
     tbody.innerHTML = "";
     matches.forEach(match => {
@@ -35,6 +35,23 @@ function fillTable(matches, tableId) {
         row.insertCell().innerHTML = getTeam(match.team2);
         row.insertCell().innerHTML = "";
         row.insertCell().innerHTML = moment.unix(match.date).fromNow();
+        row.insertCell().innerHTML = "";
+        row.insertCell().innerHTML = moment.unix(match.date).format('DD. MMM - HH:mm');
+        row.insertCell().innerHTML = "";
+    });
+}
+
+function fillPastTable(matches, tableId) {
+    let tbody = document.getElementById(tableId);
+    tbody.innerHTML = "";
+    matches.forEach(match => {
+        row = tbody.insertRow(-1);
+        row.insertCell().innerHTML = "";
+        row.insertCell().innerHTML = getTeam(match.team1);
+        row.insertCell().innerHTML = getImage(match.team1ImageUrl, match.team1);
+        row.insertCell().innerHTML = match.team1result + " - " + match.team2result;
+        row.insertCell().innerHTML = getImage(match.team2ImageUrl, match.team2);
+        row.insertCell().innerHTML = getTeam(match.team2);
         row.insertCell().innerHTML = "";
         row.insertCell().innerHTML = moment.unix(match.date).format('DD. MMM - HH:mm');
         row.insertCell().innerHTML = "";
