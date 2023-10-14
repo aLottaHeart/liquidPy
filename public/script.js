@@ -54,8 +54,10 @@ function getVS(teamName) {
 function refreshData() {
     fetch('http://localhost:3000/api/refresh')
         .catch(error => console.error(error));
+    console.log("Data refreshed");
 }
 
 function reloadData() {
     loadData();
+    console.log("Data reloaded");
 }
